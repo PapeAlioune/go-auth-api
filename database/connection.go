@@ -11,7 +11,7 @@ var (
 )
 
 func Connect() {
-	connection, err := gorm.Open(mysql.Open("root:goapisecret@tcp(127.0.0.1:52000)/go_rest?multiStatements=true"), &gorm.Config{})
+	connection, err := gorm.Open(mysql.Open("root:goapisecret@tcp(localhost:3306)/go_rest?multiStatements=true"), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")
