@@ -7,7 +7,7 @@ import (
 	"github.com/PapeAlioune/go-auth-api/database"
 	"github.com/PapeAlioune/go-auth-api/models"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/jwt/v3"
+	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -68,7 +68,7 @@ func Login(c *fiber.Ctx) error {
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
-			"message": "could not login",
+			"message": "User isn't able to Login",
 		})
 	}
 
@@ -82,7 +82,7 @@ func Login(c *fiber.Ctx) error {
 	c.Cookie(&cookie)
 
 	return c.JSON(fiber.Map{
-		"message": "success",
+		"message": "Login succeed",
 	})
 }
 

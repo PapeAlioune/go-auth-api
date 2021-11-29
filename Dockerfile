@@ -1,21 +1,20 @@
 # ./Dockerfile
-
 FROM golang:1.17-alpine AS builder
 
 # Move to working directory (/build).
 WORKDIR /build
 
-# Copy and download dependency using go mod.
-# COPY go.mod go.sum ./
-
 # Copy the code into the container.
 COPY . .
+
+# Download dependency using go mod.
 RUN go mod download
 
 
-# Set necessary environment variables needed for our image 
-# and build the API server.
+# Set necessary environment variables needed for our image
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+
+# Build the API server.
 RUN go build -mod=readonly -a -installsuffix cgo -o go-auth-api .
 
 FROM scratch

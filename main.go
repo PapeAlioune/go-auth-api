@@ -2,12 +2,13 @@ package main
 
 import (
 	"github.com/PapeAlioune/go-auth-api/database"
+	"github.com/PapeAlioune/go-auth-api/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
-	database.InitDB()
+	database.Connect()
 
 	app := fiber.New()
 
@@ -15,7 +16,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	// routes.Setup(app)
+	routes.Setup(app)
 
 	app.Listen(":8000")
 }
